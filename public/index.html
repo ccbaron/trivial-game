@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <title>Trivia</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <h1>Juego de Trivia</h1>
   <label for="category-select">Categoría:</label>
@@ -14,7 +16,7 @@
   <div id="question-container">
     <p id="category"></p>
     <p id="question"></p>
-    
+
     <div id="options"></div>
     <details id="answer-details">
       <summary>Mostrar respuesta</summary>
@@ -28,7 +30,7 @@
     let currentCategory = '';
 
     async function fetchCategories() {
-      const res = await fetch('/api/categories');
+      const res = await fetch('http://localhost:3001/api/categories');
       const categories = await res.json();
       const select = document.getElementById('category-select');
       categories.forEach(cat => {
@@ -40,7 +42,7 @@
     }
 
     async function fetchQuestion() {
-      let url = '/api/question';
+      let url = 'http://localhost:3001/api/question';
       if (currentCategory) {
         url += `?category=${encodeURIComponent(currentCategory)}`;
       }
@@ -84,4 +86,5 @@
     fetchCategories().then(fetchQuestion);
   </script>
 </body>
+
 </html>
